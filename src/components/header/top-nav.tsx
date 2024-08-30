@@ -15,7 +15,7 @@ export const TopNav = () => {
     },
     {
       id: "/posts",
-      label: t('header.nav-posts'),
+      label: t("header.nav-posts"),
     },
   ];
 
@@ -24,7 +24,7 @@ export const TopNav = () => {
       {TOP_ROUTES.map((route) => (
         <Link
           to={route.id}
-          className="px-6 font-light hover:text-primary text-primary/80 transition-colors duration-300"
+          className="px-6 hover:text-foreground text-foreground/80 transition-colors duration-300"
           key={route.id}
         >
           {route.label}

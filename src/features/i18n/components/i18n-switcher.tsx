@@ -10,9 +10,18 @@ import { Languages } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { supportLanguages } from "..";
+import { LOCAL_LANG_KEY } from "../constant";
+
 
 export const I18nSwitcher = () => {
   const { i18n, t } = useTranslation();
+
+  const setLanguageWithLocale = (
+    language: (typeof supportLanguages)[number]["key"]
+  ) => {
+    i18n.changeLanguage(language);
+    localStorage.setItem(LOCAL_LANG_KEY, language);
+  };
 
   return (
     <DropdownMenu>
@@ -25,7 +34,7 @@ export const I18nSwitcher = () => {
       <DropdownMenuContent align="end">
         {supportLanguages.map((language) => (
           <DropdownMenuItem
-            onClick={() => i18n.changeLanguage(language.key)}
+            onClick={() => setLanguageWithLocale(language.key)}
             key={language.key}
           >
             {language.label}
