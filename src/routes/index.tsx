@@ -47,16 +47,18 @@ export const Route = createFileRoute("/")({
         </div>
       </SectionContainer>
 
-      <Marquee className="my-24 border-y" applyMask={false}>
-        <div className="text-4xl py-8 flex flex-row gap-x-16 text-muted-foreground mr-16 font-semibold">
-          <h1>LOCAL</h1>
-          <h1>HOST</h1>
-          <h1>REMOTE</h1>
-          <h1>SERVER</h1>
-          <h1>WHAT</h1>
-          <h1>EVER</h1>
-        </div>
-      </Marquee>
+      <div className="border-y my-24">
+        <Marquee applyMask={false} className="[--duration:20s]">
+          <div className="text-xl py-8 flex flex-row gap-x-16 text-foreground/85 mr-16 font-medium">
+            <h1>Rspack-based</h1>
+            <h1>Batteries Included</h1>
+            <h1>Framework Agnostic</h1>
+            <h1>Deep Optimization</h1>
+            <h1>Highly Pluggable</h1>
+            <h1>Easy to Configure</h1>
+          </div>
+        </Marquee>
+      </div>
     </div>
   ),
 });

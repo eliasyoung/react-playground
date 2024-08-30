@@ -1,9 +1,9 @@
-import { useBoundStore } from "@/stores";
+import { useThemeStore } from "../stores";
 import { useEffect } from "react";
 import { useShallow } from "zustand/react/shallow";
 
 export const useTheme = () => {
-  const { theme, setTheme } = useBoundStore(
+  const { theme, setTheme } = useThemeStore(
     useShallow((state) => ({ theme: state.theme, setTheme: state.setTheme }))
   );
 

@@ -66,7 +66,7 @@ export const HomeChart = () => {
             barSize={6}
             label={{
               position: "right",
-              fill: "white",
+              fill: "hsl(var(--foreground))",
               formatter: (value: number) =>
                 value > 1000 ? `${value / 1000}s` : `${value}ms`,
               fontSize: 10,
@@ -79,7 +79,7 @@ export const HomeChart = () => {
             barSize={6}
             label={{
               position: "right",
-              fill: "white",
+              fill: "hsl(var(--foreground))",
               formatter: (value: number) =>
                 value > 1000 ? `${value / 1000}s` : `${value}ms`,
               fontSize: 10,
@@ -92,7 +92,7 @@ export const HomeChart = () => {
             barSize={6}
             label={{
               position: "right",
-              fill: "white",
+              fill: "hsl(var(--foreground))",
               formatter: (value: number) =>
                 value > 1000 ? `${value / 1000}s` : `${value}ms`,
               fontSize: 10,

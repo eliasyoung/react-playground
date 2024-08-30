@@ -1,15 +1,13 @@
-import { StateCreator } from "zustand";
+import { create } from "zustand";
 import type { ThemeOption } from "../model";
 import { THEME_OPTIONS } from "../constants";
 
-export interface ThemeSlice {
+export interface ThemeState {
   theme: ThemeOption;
   setTheme: (theme: ThemeOption) => void;
 }
 
-export const createThemeSlice: StateCreator<ThemeSlice, [], [], ThemeSlice> = (
-  set
-) => {
+export const useThemeStore = create<ThemeState>((set) => {
   const storageTheme = localStorage.getItem("theme_key") as ThemeOption | null;
   return {
     theme:
@@ -20,4 +18,4 @@ export const createThemeSlice: StateCreator<ThemeSlice, [], [], ThemeSlice> = (
       set((_state) => ({ theme: theme }));
     },
   };
-};
+});

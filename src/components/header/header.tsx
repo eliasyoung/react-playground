@@ -10,7 +10,9 @@ export const Header = () => {
         <Logo className="size-[75%] drop-shadow-md" />
       </Link>
       <TopNav />
-      <ThemeToogle />
+      <div>
+        <ThemeToogle />
+      </div>
     </header>
   );
 };
