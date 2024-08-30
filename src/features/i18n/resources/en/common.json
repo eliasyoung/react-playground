@@ -1,0 +1,16 @@
+{
+  "header": {
+    "nav-home": "Home",
+    "nav-about": "About",
+    "nav-posts": "Posts"
+  },
+  "theme": {
+    "text-light": "Light",
+    "text-dark": "Dark",
+    "text-system": "System",
+    "toggle-button-text-sr": "Toggle Theme"
+  },
+  "i18": {
+    "toggle-button-text-sr": "Switch Language"
+  }
+}

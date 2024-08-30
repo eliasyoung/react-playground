@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { ThemeOption } from "../model";
+import type { ThemeOption } from "../@types";
 import { THEME_OPTIONS } from "../constants";
 
 export interface ThemeState {

@@ -4,6 +4,8 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 
 import { routeTree } from "./routeTree.gen";
 
+import '@features/i18n'
+
 import "./index.css";
 
 // Supports weights 100-900
