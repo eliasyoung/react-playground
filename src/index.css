@@ -96,7 +96,7 @@
 body {
   /* background-color: rgb(17, 15, 35); */
   /* color: rgb(230, 218, 254); */
-  @apply bg-background text-primary overflow-hidden;
+  @apply bg-background text-primary overflow-x-hidden overflow-y-auto;
 
   font-family: "Inter Variable", "Inter Tight Variable", "Montserrat Variable",
     sans-serif;

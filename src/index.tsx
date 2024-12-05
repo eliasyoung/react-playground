@@ -4,16 +4,17 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 
 import { routeTree } from "./routeTree.gen";
 
-import '@features/i18n'
+import "@features/i18n";
 
 import "./index.css";
+import "@xyflow/react/dist/style.css";
 
 // Supports weights 100-900
 import "@fontsource-variable/inter";
 // Supports weights 100-900
 import "@fontsource-variable/inter-tight";
 // Supports weights 100-900
-import '@fontsource-variable/montserrat';
+import "@fontsource-variable/montserrat";
 
 const router = createRouter({ routeTree });
 
@@ -29,6 +30,6 @@ if (rootEl) {
   root.render(
     <React.StrictMode>
       <RouterProvider router={router} />
-    </React.StrictMode>
+    </React.StrictMode>,
   );
 }
