@@ -1,21 +1,21 @@
-import { create } from "zustand";
-import type { ThemeOption } from "../@types";
-import { THEME_OPTIONS } from "../constants";
+import { create } from 'zustand'
+import type { ThemeOption } from '../@types'
+import { THEME_OPTIONS } from '../constants'
 
 export interface ThemeState {
-  theme: ThemeOption;
-  setTheme: (theme: ThemeOption) => void;
+  theme: ThemeOption
+  setTheme: (theme: ThemeOption) => void
 }
 
 export const useThemeStore = create<ThemeState>((set) => {
-  const storageTheme = localStorage.getItem("theme_key") as ThemeOption | null;
+  const storageTheme = localStorage.getItem('theme_key') as ThemeOption | null
   return {
     theme:
       storageTheme && THEME_OPTIONS.includes(storageTheme)
         ? storageTheme
-        : "light",
+        : 'light',
     setTheme: (theme) => {
-      set((_state) => ({ theme: theme }));
+      set((_state) => ({ theme: theme }))
     },
-  };
-});
+  }
+})

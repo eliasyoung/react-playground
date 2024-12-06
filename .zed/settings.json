@@ -1,0 +1,8 @@
+{
+  "language_servers": ["biome"],
+  "formatter": {
+    "language_server": {
+      "name": "biome"
+    }
+  }
+}

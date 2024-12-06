@@ -19,8 +19,7 @@
       "@components/*": ["./src/components/*"],
       "@routes/*": ["./src/routes/*"],
       "@lib/*": ["./src/lib/*"],
-      "@features/*": ["./src/features/*"],
-
+      "@features/*": ["./src/features/*"]
     }
   },
   "include": ["src"]

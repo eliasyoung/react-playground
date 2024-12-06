@@ -1,7 +1,7 @@
-import common from "./common.json";
+import common from './common.json'
 
 const zh = {
   common,
-};
+}
 
-export default zh;
+export default zh

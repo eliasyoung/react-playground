@@ -1,9 +1,9 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils'
 
 interface SectionContainerProps {
-  maxWidth?: number;
-  className?: string;
-  children?: React.ReactNode;
+  maxWidth?: number
+  className?: string
+  children?: React.ReactNode
 }
 export const SectionContainer = ({
   className,
@@ -13,12 +13,12 @@ export const SectionContainer = ({
   return (
     <div
       className={cn(
-        "mx-auto",
-        maxWidth ? "max-w-[" + maxWidth + "px]" : "max-w-[1440px]",
-        className
+        'mx-auto',
+        maxWidth ? 'max-w-[' + maxWidth + 'px]' : 'max-w-[1440px]',
+        className,
       )}
     >
       {children}
     </div>
-  );
-};
+  )
+}

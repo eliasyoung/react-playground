@@ -1,11 +1,11 @@
-import en from "./en";
-import zh from "./zh";
+import en from './en'
+import zh from './zh'
 
 const resources = {
   en,
   zh,
-} as const;
+} as const
 
-const defaultNS = "common";
+const defaultNS = 'common'
 
-export { resources, defaultNS };
+export { resources, defaultNS }
