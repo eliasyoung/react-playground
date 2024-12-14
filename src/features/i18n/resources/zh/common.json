@@ -2,7 +2,8 @@
   "header": {
     "nav-home": "首页",
     "nav-about": "关于",
-    "nav-posts": "文章"
+    "nav-posts": "文章",
+    "nav-matrix-flows": "矩阵流程"
   },
   "theme": {
     "text-light": "浅色",

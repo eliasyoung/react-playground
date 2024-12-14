@@ -17,6 +17,10 @@ export const TopNav = () => {
       id: '/posts',
       label: t('header.nav-posts'),
     },
+    {
+      id: '/matrix-flow',
+      label: t('header.nav-matrix-flows'),
+    }
   ]
 
   return (

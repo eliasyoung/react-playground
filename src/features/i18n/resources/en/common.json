@@ -2,7 +2,8 @@
   "header": {
     "nav-home": "Home",
     "nav-about": "About",
-    "nav-posts": "Posts"
+    "nav-posts": "Posts",
+    "nav-matrix-flows": "Matrix Flows"
   },
   "theme": {
     "text-light": "Light",

@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as PostsIndexImport } from './routes/posts/index'
+import { Route as MatrixFlowIndexImport } from './routes/matrix-flow/index'
 import { Route as PostsPostIdImport } from './routes/posts/$postId'
 import { Route as aboutAboutImport } from './routes/(about)/about'
 import { Route as aboutAboutWhatImport } from './routes/(about)/about.what'
@@ -28,6 +29,12 @@ const IndexRoute = IndexImport.update({
 const PostsIndexRoute = PostsIndexImport.update({
   id: '/posts/',
   path: '/posts/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const MatrixFlowIndexRoute = MatrixFlowIndexImport.update({
+  id: '/matrix-flow/',
+  path: '/matrix-flow/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -74,6 +81,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PostsPostIdImport
       parentRoute: typeof rootRoute
     }
+    '/matrix-flow/': {
+      id: '/matrix-flow/'
+      path: '/matrix-flow'
+      fullPath: '/matrix-flow'
+      preLoaderRoute: typeof MatrixFlowIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/posts/': {
       id: '/posts/'
       path: '/posts'
@@ -109,6 +123,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof aboutAboutRouteWithChildren
   '/posts/$postId': typeof PostsPostIdRoute
+  '/matrix-flow': typeof MatrixFlowIndexRoute
   '/posts': typeof PostsIndexRoute
   '/about/what': typeof aboutAboutWhatRoute
 }
@@ -117,6 +132,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof aboutAboutRouteWithChildren
   '/posts/$postId': typeof PostsPostIdRoute
+  '/matrix-flow': typeof MatrixFlowIndexRoute
   '/posts': typeof PostsIndexRoute
   '/about/what': typeof aboutAboutWhatRoute
 }
@@ -126,20 +142,34 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/(about)/about': typeof aboutAboutRouteWithChildren
   '/posts/$postId': typeof PostsPostIdRoute
+  '/matrix-flow/': typeof MatrixFlowIndexRoute
   '/posts/': typeof PostsIndexRoute
   '/(about)/about/what': typeof aboutAboutWhatRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/posts/$postId' | '/posts' | '/about/what'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/posts/$postId'
+    | '/matrix-flow'
+    | '/posts'
+    | '/about/what'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/posts/$postId' | '/posts' | '/about/what'
+  to:
+    | '/'
+    | '/about'
+    | '/posts/$postId'
+    | '/matrix-flow'
+    | '/posts'
+    | '/about/what'
   id:
     | '__root__'
     | '/'
     | '/(about)/about'
     | '/posts/$postId'
+    | '/matrix-flow/'
     | '/posts/'
     | '/(about)/about/what'
   fileRoutesById: FileRoutesById
@@ -149,6 +179,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   aboutAboutRoute: typeof aboutAboutRouteWithChildren
   PostsPostIdRoute: typeof PostsPostIdRoute
+  MatrixFlowIndexRoute: typeof MatrixFlowIndexRoute
   PostsIndexRoute: typeof PostsIndexRoute
 }
 
@@ -156,6 +187,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   aboutAboutRoute: aboutAboutRouteWithChildren,
   PostsPostIdRoute: PostsPostIdRoute,
+  MatrixFlowIndexRoute: MatrixFlowIndexRoute,
   PostsIndexRoute: PostsIndexRoute,
 }
 
@@ -172,6 +204,7 @@ export const routeTree = rootRoute
         "/",
         "/(about)/about",
         "/posts/$postId",
+        "/matrix-flow/",
         "/posts/"
       ]
     },
@@ -186,6 +219,9 @@ export const routeTree = rootRoute
     },
     "/posts/$postId": {
       "filePath": "posts/$postId.tsx"
+    },
+    "/matrix-flow/": {
+      "filePath": "matrix-flow/index.tsx"
     },
     "/posts/": {
       "filePath": "posts/index.tsx"

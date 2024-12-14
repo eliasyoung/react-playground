@@ -61,9 +61,9 @@ export const Route = createFileRoute('/')({
         </Marquee>
       </div>
 
-      <SectionContainer>
+      {/* <SectionContainer>
         <TestServer />
-      </SectionContainer>
+      </SectionContainer> */}
     </div>
   ),
 })
