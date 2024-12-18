@@ -6,7 +6,7 @@ export const Route = createRootRoute({
   component: () => (
     <React.Fragment>
       <Header />
-      <div className='flex justify-center items-center'>
+      <div className='flex justify-center items-center overflow-y-auto overflow-x-hidden h-full'>
         <Outlet />
       </div>
     </React.Fragment>

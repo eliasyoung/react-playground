@@ -1,8 +1,10 @@
+import { useTheme } from '@/features/theme-toggle/hooks'
 import { Link } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 
 export const TopNav = () => {
   const { t } = useTranslation()
+  const { theme } = useTheme
 
   const TOP_ROUTES = [
     {
@@ -20,11 +22,11 @@ export const TopNav = () => {
     {
       id: '/matrix-flow',
       label: t('header.nav-matrix-flows'),
-    }
+    },
   ]
 
   return (
-    <nav className='w-full flex justify-center items-center xl:py-6 relative gradient-border-b'>
+    <nav className='w-full flex justify-center items-center xl:py-6 relative gradient-border-b z-10'>
       {TOP_ROUTES.map((route) => (
         <Link
           to={route.id}

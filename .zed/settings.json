@@ -1,8 +1,15 @@
 {
-  "language_servers": ["biome"],
+  // "language_servers": ["biome", "..."],
   "formatter": {
     "language_server": {
       "name": "biome"
     }
   }
+  // "lsp": {
+  //   "biome": {
+  //     "settings": {
+  //       "require_config_file": true
+  //     }
+  //   }
+  // }
 }

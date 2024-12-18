@@ -1,3 +1,6 @@
+// react scan must be imported before react
+import { scan } from 'react-scan'
+
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
@@ -24,6 +27,14 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
+
+// react-scan setup
+if (typeof window !== 'undefined') {
+  scan({
+    enabled: true,
+    log: true, // logs render info to console (default: false)
+  })
+}
 
 const router = createRouter({ routeTree })
 

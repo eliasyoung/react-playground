@@ -1,6 +1,7 @@
+import React from 'react'
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts'
 import {
-  ChartConfig,
+  type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
@@ -32,7 +33,7 @@ const chartConfig = {
     color: 'hsl(var(--chart-3))',
   },
 } satisfies ChartConfig
-export const HomeChart = () => {
+const HomeChart = React.memo(() => {
   return (
     <div className='px-4 py-4'>
       <h1 className='text-center'>Build Performance</h1>
@@ -102,4 +103,8 @@ export const HomeChart = () => {
       </ChartContainer>
     </div>
   )
-}
+})
+
+HomeChart.displayName = 'HomeChart'
+
+export { HomeChart }

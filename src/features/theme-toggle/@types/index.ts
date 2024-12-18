@@ -1,3 +1,3 @@
-import { THEME_OPTIONS } from '../constants'
+import type { THEME_OPTIONS } from '../constants'
 
 export type ThemeOption = (typeof THEME_OPTIONS)[number]

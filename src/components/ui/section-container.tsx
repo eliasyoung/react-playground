@@ -14,7 +14,7 @@ export const SectionContainer = ({
     <div
       className={cn(
         'mx-auto',
-        maxWidth ? 'max-w-[' + maxWidth + 'px]' : 'max-w-[1440px]',
+        maxWidth ? `max-w-[${maxWidth}px]` : 'max-w-[1440px]',
         className,
       )}
     >

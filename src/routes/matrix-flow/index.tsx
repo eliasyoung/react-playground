@@ -1,6 +1,6 @@
-import { SectionContainer } from '@/components/ui/section-container'
 import MatrixFlowContainer from '@/features/matrix-flow/components'
 import { createFileRoute } from '@tanstack/react-router'
+import { ReactFlowProvider } from '@xyflow/react'
 
 export const Route = createFileRoute('/matrix-flow/')({
   component: RouteComponent,
@@ -8,10 +8,10 @@ export const Route = createFileRoute('/matrix-flow/')({
 
 function RouteComponent() {
   return (
-    <div className='w-full relative'>
-      <SectionContainer>
+    <div className='w-full relative h-[calc(100vh-72px)]'>
+      <ReactFlowProvider>
         <MatrixFlowContainer />
-      </SectionContainer>
+      </ReactFlowProvider>
     </div>
   )
 }
