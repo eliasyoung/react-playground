@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { type MouseEvent } from 'react'
 
 import {
   ContextMenu,
@@ -15,14 +15,28 @@ import {
   ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from '@/components/ui/context-menu'
+import { useTranslation } from 'react-i18next'
+import { useNodesInteraction } from '@/features/matrix-flow/hooks/use-nodes-interaction'
 
 const FlowContextMenu = React.memo(
   ({ children }: { children?: React.ReactNode }) => {
+    const { t } = useTranslation('matrixFlow')
+
+    const { handleNodeAddWithPanelContextClick } = useNodesInteraction()
+
+    const handleAddNodeClick = (e: MouseEvent) => {
+      e.stopPropagation()
+      handleNodeAddWithPanelContextClick()
+    }
+
     return (
       <ContextMenu>
         <ContextMenuTrigger>{children && children}</ContextMenuTrigger>
         <ContextMenuContent className='w-64'>
-          <ContextMenuItem inset>
+          <ContextMenuItem inset onClick={handleAddNodeClick}>
+            {t('flow-contextmenu.add-node')}
+          </ContextMenuItem>
+          {/* <ContextMenuItem inset>
             Back
             <ContextMenuShortcut>⌘[</ContextMenuShortcut>
           </ContextMenuItem>
@@ -61,7 +75,7 @@ const FlowContextMenu = React.memo(
               Pedro Duarte
             </ContextMenuRadioItem>
             <ContextMenuRadioItem value='colm'>Colm Tuite</ContextMenuRadioItem>
-          </ContextMenuRadioGroup>
+          </ContextMenuRadioGroup> */}
         </ContextMenuContent>
       </ContextMenu>
     )

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   ReactFlow,
   MiniMap,
@@ -20,16 +20,18 @@ import {
   type OnNodesDelete,
 } from '@xyflow/react'
 import '@xyflow/react/dist/style.css'
-import { useEventListener, useDebounceCallback } from 'usehooks-ts'
+import { useEventListener } from 'usehooks-ts'
 import { useTheme } from '@/features/theme-toggle/hooks'
-import BaseNode from './base/node'
-import FlowContextMenu from './base/flow-context-menu'
+import MatrixNode from './node/node'
+import FlowContextMenu from './flow-context-menu'
 import { Button } from '@/components/ui/button'
-import { useNodeInteraction } from '../hooks/use-node-interaction'
+import { useNodesInteraction } from '@/features/matrix-flow/hooks/use-nodes-interaction'
 import useMatrixFlowStore from '../store'
 import { useShallow } from 'zustand/react/shallow'
 import { useMatrixFlow } from '../hooks/use-matrix-flow'
-import NewNode from './new-node'
+import NewArrivalNode from '@/features/matrix-flow/components/node/new-arrival-node'
+import { useTranslation } from 'react-i18next'
+import { getHelloWorld } from '../servies'
 
 const initialNodes: Node[] = [
   { id: '1', type: 'testNode', position: { x: 0, y: 0 }, data: { label: '1' } },
@@ -59,25 +61,28 @@ const MatrixFlowContainer = React.memo(() => {
 
   const { theme } = useTheme()
 
-  const { isAddingNode, setIsAddingNode, setMousePosition } =
+  const { isAddingNode, setMousePosition, newArrivalNodeData } =
     useMatrixFlowStore(
       useShallow((state) => ({
         isAddingNode: state.isAddingNode,
         setIsAddingNode: state.setIsAddingNode,
         setMousePosition: state.setMousePosition,
+        newArrivalNodeData: state.newArrivalNodeData,
       })),
     )
 
-  const { handleNodeAdd } = useMatrixFlow()
+  const { handleSaveMatrixFlow } = useMatrixFlow()
 
   const flow = useReactFlow()
 
-  const { handleNodeDelete, getCurrentNodes } = useNodeInteraction()
+  const { t } = useTranslation('matrixFlow')
+
+  const { handleNodeDelete, getCurrentNodes } = useNodesInteraction()
 
   const [nodes, setNodes] = useState(initialNodes)
   const [edges, setEdges] = useState(initialEdges)
 
-  const nodeTypes = useMemo(() => ({ testNode: BaseNode }), [])
+  const nodeTypes = useMemo(() => ({ testNode: MatrixNode }), [])
 
   const onNodesChange: OnNodesChange = useCallback(
     (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -95,7 +100,7 @@ const MatrixFlowContainer = React.memo(() => {
 
   const onNodesDragEnd = useCallback<OnNodeDrag>(
     (e, node) => {
-      console.log(flow.toObject())
+      console.log('drag end.')
     },
     [flow],
   )
@@ -105,32 +110,17 @@ const MatrixFlowContainer = React.memo(() => {
     handleNodeDelete('123')
   }, [])
 
-  const onAddNode = useCallback(() => {
-    handleNodeAdd()
-  }, [handleNodeAdd])
-
   // Nodes interaction
   const handleNodesDelete = useCallback(() => {
-    const { getNodes, getEdges } = flow
-    const nodes = getNodes()
-    const edges = getEdges()
+    const edges = flow.getEdges()
 
     if (edges.some((e) => e.selected)) {
-      console.log('edges selected')
       return
     }
 
     const selectedNode = nodes.find((n) => n.selected)
     if (selectedNode) {
-      const connectedEdges = getConnectedEdges([selectedNode], edges)
-      setEdges((prev) =>
-        [...prev].filter(
-          (edge) => !connectedEdges.find((e) => e.id === edge.id),
-        ),
-      )
-      setNodes((prev) =>
-        [...prev].filter((node) => node.id !== selectedNode.id),
-      )
+      flow.deleteElements({ nodes: [selectedNode] })
     }
   }, [flow])
 
@@ -152,9 +142,13 @@ const MatrixFlowContainer = React.memo(() => {
     matrixflowContainerRef,
   )
 
+  useEffect(() => {
+    getHelloWorld().then((res) => console.log(res))
+  }, [])
+
   return (
-    <div className='size-full' ref={matrixflowContainerRef}>
-      <NewNode />
+    <div className='size-full overflow-hidden' ref={matrixflowContainerRef}>
+      {newArrivalNodeData && <NewArrivalNode />}
       <FlowContextMenu>
         <ReactFlow
           nodeTypes={nodeTypes}
@@ -166,6 +160,7 @@ const MatrixFlowContainer = React.memo(() => {
           onNodeDragStop={onNodesDragEnd}
           onConnect={onConnect}
           colorMode={theme}
+          deleteKeyCode={null}
           onContextMenu={(e) => {
             if (
               e.target instanceof Element &&
@@ -175,30 +170,17 @@ const MatrixFlowContainer = React.memo(() => {
             }
           }}
         >
-          <Panel position='top-left'>
-            <div className='flex flex-row gap-2'>
-              <Button variant={'outline'} onClick={handleNodesDelete}>
-                Publish
-              </Button>
-              <Button
-                variant={'outline'}
-                onClick={() => setIsAddingNode(!isAddingNode)}
-              >
-                Save
-              </Button>
-              <Button
-                variant={'outline'}
-                disabled={isAddingNode}
-                onClick={() => getCurrentNodes()}
-              >
-                Back
-              </Button>
-            </div>
-          </Panel>
           <Panel position='top-right'>
             <div className='flex flex-row gap-2'>
-              <Button variant={'outline'} onClick={() => onAddNode()}>
-                Add Node
+              <Button
+                variant={'outline'}
+                onClick={handleSaveMatrixFlow}
+                disabled={isAddingNode}
+              >
+                {t('control-panel.save')}
+              </Button>
+              <Button variant={'outline'} onClick={handleNodesDelete}>
+                {t('control-panel.publish')}
               </Button>
             </div>
           </Panel>

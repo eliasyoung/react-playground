@@ -28,6 +28,9 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 
+// toaster
+import { Toaster } from '@/components/ui/sonner'
+
 // react-scan setup
 if (typeof window !== 'undefined') {
   scan({
@@ -53,6 +56,7 @@ if (rootEl) {
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
+        <Toaster position='top-center' />
       </QueryClientProvider>
     </React.StrictMode>,
   )

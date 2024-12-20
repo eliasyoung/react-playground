@@ -1,5 +1,18 @@
 {
   "node": {
     "title": "Test Node {{id}}"
+  },
+  "control-panel": {
+    "publish": "Publish",
+    "save": "Save"
+  },
+  "flow-contextmenu": {
+    "add-node": "Add Node"
+  },
+  "node-contextmenu": {
+    "delete-node": "Delete Node"
+  },
+  "toast-message": {
+    "save-success": "Save graph successfully!"
   }
 }

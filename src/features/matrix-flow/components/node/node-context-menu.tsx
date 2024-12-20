@@ -15,14 +15,23 @@ import {
   ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from '@/components/ui/context-menu'
+import { useNodesInteraction } from '../../hooks/use-nodes-interaction'
+import { useTranslation } from 'react-i18next'
 
 const NodeContextMenu = React.memo(
-  ({ children }: { children: React.ReactNode }) => {
+  ({ children, id }: { children?: React.ReactNode; id: string }) => {
+    const { t } = useTranslation('matrixFlow')
+
+    const { handleNodeDelete } = useNodesInteraction()
+
     return (
       <ContextMenu>
-        <ContextMenuTrigger>{children}</ContextMenuTrigger>
+        <ContextMenuTrigger>{children && children}</ContextMenuTrigger>
         <ContextMenuContent className='w-64'>
-          <ContextMenuItem inset>
+          <ContextMenuItem inset onClick={() => handleNodeDelete(id)}>
+            {t('node-contextmenu.delete-node')}
+          </ContextMenuItem>
+          {/* <ContextMenuItem inset>
             Back
             <ContextMenuShortcut>⌘[</ContextMenuShortcut>
           </ContextMenuItem>
@@ -33,7 +42,7 @@ const NodeContextMenu = React.memo(
           <ContextMenuItem inset>
             Reload
             <ContextMenuShortcut>⌘R</ContextMenuShortcut>
-          </ContextMenuItem>
+          </ContextMenuItem> */}
         </ContextMenuContent>
       </ContextMenu>
     )

@@ -1,4 +1,4 @@
-import MatrixFlowContainer from '@/features/matrix-flow/components'
+import MatrixFlowContainer from '@/features/matrix-flow/components/matrix-flow-container'
 import { createFileRoute } from '@tanstack/react-router'
 import { ReactFlowProvider } from '@xyflow/react'
 

@@ -1,5 +1,18 @@
 {
   "node": {
     "title": "测试节点{{id}}"
+  },
+  "control-panel": {
+    "publish": "发布",
+    "save": "保存"
+  },
+  "flow-contextmenu": {
+    "add-node": "添加节点"
+  },
+  "node-contextmenu": {
+    "delete-node": "删除节点"
+  },
+  "toast-message": {
+    "save-success": "保存图形成功！"
   }
 }

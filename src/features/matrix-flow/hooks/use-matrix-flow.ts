@@ -1,30 +1,25 @@
 import { useReactFlow } from '@xyflow/react'
-import { useCallback, useEffect } from 'react'
-import { useShallow } from 'zustand/react/shallow'
-import useMatrixFlowStore from '../store'
-import { generateNode } from '../utils'
+import { useCallback } from 'react'
+import { toast } from 'sonner'
+import { useTranslation } from 'react-i18next'
+import { postSaveFlow } from '../servies'
 
 export const useMatrixFlow = () => {
   const flow = useReactFlow()
-  const { isAddingNode, setIsAddingNode } = useMatrixFlowStore(
-    useShallow((state) => ({
-      isAddingNode: state.isAddingNode,
-      setIsAddingNode: state.setIsAddingNode,
-    })),
-  )
+  const { t } = useTranslation('matrixFlow')
 
-  const handleNodeAdd = useCallback(() => {
-    if (isAddingNode) return
+  const handleSaveMatrixFlow = useCallback(() => {
+    const flowObj = flow.toObject()
 
-    setIsAddingNode(true)
+    postSaveFlow(Date.now().toString(), flowObj)
+      .then((res) => console.log(res))
+      .catch((rej) => console.log(rej))
 
-    const newNode = generateNode()
-    flow.setNodes((prev) => [...prev, newNode])
-
-    setIsAddingNode(false)
-  }, [isAddingNode, flow])
+    toast.success(t('toast-message.save-success'))
+    // TODO: SEND TO API AND STORE IT
+  }, [flow])
 
   return {
-    handleNodeAdd,
+    handleSaveMatrixFlow,
   }
 }
