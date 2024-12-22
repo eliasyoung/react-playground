@@ -2,7 +2,7 @@ import { useReactFlow } from '@xyflow/react'
 import { useCallback } from 'react'
 import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
-import { postSaveFlow } from '../servies'
+import { postCreateFlow, postSaveFlow } from '../servies'
 
 export const useMatrixFlow = () => {
   const flow = useReactFlow()
@@ -19,7 +19,18 @@ export const useMatrixFlow = () => {
     // TODO: SEND TO API AND STORE IT
   }, [flow])
 
+  const handleCreateMatrixFlow = useCallback(() => {
+    const flowObj = flow.toObject()
+
+    postCreateFlow(flowObj)
+      .then((res) => console.log(res))
+      .catch((rej) => console.log(rej))
+
+
+  }, [flow])
+
   return {
     handleSaveMatrixFlow,
+    handleCreateMatrixFlow
   }
 }

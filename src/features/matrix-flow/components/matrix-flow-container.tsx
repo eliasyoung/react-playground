@@ -71,7 +71,7 @@ const MatrixFlowContainer = React.memo(() => {
       })),
     )
 
-  const { handleSaveMatrixFlow } = useMatrixFlow()
+  const { handleSaveMatrixFlow, handleCreateMatrixFlow } = useMatrixFlow()
 
   const flow = useReactFlow()
 
@@ -179,7 +179,7 @@ const MatrixFlowContainer = React.memo(() => {
               >
                 {t('control-panel.save')}
               </Button>
-              <Button variant={'outline'} onClick={handleNodesDelete}>
+              <Button variant={'outline'} onClick={handleCreateMatrixFlow}>
                 {t('control-panel.publish')}
               </Button>
             </div>
