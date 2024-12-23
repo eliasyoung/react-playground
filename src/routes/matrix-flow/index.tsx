@@ -1,6 +1,5 @@
-import MatrixFlowContainer from '@/features/matrix-flow/components/matrix-flow-container'
+import MatrixFLowListContainer from '@/features/matrix-flow/components/matrix-flow-list/matrix-flow-list-container'
 import { createFileRoute } from '@tanstack/react-router'
-import { ReactFlowProvider } from '@xyflow/react'
 
 export const Route = createFileRoute('/matrix-flow/')({
   component: RouteComponent,
@@ -8,10 +7,8 @@ export const Route = createFileRoute('/matrix-flow/')({
 
 function RouteComponent() {
   return (
-    <div className='w-full relative h-[calc(100vh-72px)]'>
-      <ReactFlowProvider>
-        <MatrixFlowContainer />
-      </ReactFlowProvider>
+    <div className='w-full relative min-h-[calc(100vh-72px)]'>
+      <MatrixFLowListContainer />
     </div>
   )
 }

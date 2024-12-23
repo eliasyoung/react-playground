@@ -1,3 +1,5 @@
+import type { ReactFlowJsonObject } from '@xyflow/react'
+
 export type NodeType = 'testNode'
 
 export type MousePosition = {
@@ -12,3 +14,15 @@ export type NewArrivalNodeData = {
   data: Record<string, unknown>
   type: NodeType
 }
+
+export type MatrixFlowListItem = {
+  id: string
+  created_at: string
+  updated_at: string
+}
+
+export type MatrixFlowGraphData = {
+  graph: ReactFlowJsonObject
+}
+
+export type MatrixFlowItem = MatrixFlowListItem & MatrixFlowGraphData
