@@ -9,17 +9,18 @@ export const useMatrixFlow = () => {
   const { t } = useTranslation('matrixFlow')
 
   const handleSaveMatrixFlow = useCallback(
-    (flow_id: string) => {
+    async (flow_id: string) => {
       const flowData = {
         graph: flow.toObject(),
       }
 
-      patchSaveFlow(flow_id, flowData)
-        .then((res) => console.log(res))
-        .catch((rej) => console.log(rej))
-
-      toast.success(t('toast-message.save-success'))
-      // TODO: SEND TO API AND STORE IT
+      try {
+        const res = await patchSaveFlow(flow_id, flowData)
+        console.log(res)
+        toast.success(t('toast-message.save-success'))
+      } catch (err) {
+        console.log(err)
+      }
     },
     [flow],
   )

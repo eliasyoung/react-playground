@@ -177,6 +177,13 @@ const MatrixFlowContainer = React.memo<MatrixFlowContainerProps>(
               }
             }}
           >
+            <Panel position='top-left'>
+              <div>
+                <h1 className='text-xl text-primary font-display font-semibold'>
+                  {initFlowData.name}
+                </h1>
+              </div>
+            </Panel>
             <Panel position='top-right'>
               <div className='flex flex-row gap-2'>
                 <Button
@@ -186,7 +193,7 @@ const MatrixFlowContainer = React.memo<MatrixFlowContainerProps>(
                 >
                   {t('control-panel.save')}
                 </Button>
-                <Button variant={'outline'} onClick={handleCreateMatrixFlow}>
+                <Button variant={'outline'}>
                   {t('control-panel.publish')}
                 </Button>
               </div>
