@@ -7,7 +7,7 @@ export const Route = createFileRoute('/matrix-flow/')({
 
 function RouteComponent() {
   return (
-    <div className='w-full relative min-h-[calc(100vh-72px)]'>
+    <div className='w-full relative min-h-[calc(100vh-72px)] grid'>
       <MatrixFLowListContainer />
     </div>
   )

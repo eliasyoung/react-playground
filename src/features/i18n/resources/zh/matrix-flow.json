@@ -4,13 +4,30 @@
   },
   "control-panel": {
     "publish": "发布",
-    "save": "保存"
+    "save": "保存",
+    "run": "运行"
   },
   "flow-contextmenu": {
     "add-node": "添加节点"
   },
   "node-contextmenu": {
     "delete-node": "删除节点"
+  },
+  "matrix-flow-list": {
+    "create-matrix-dialog": {
+      "trigger-button": "创建",
+      "dialog-title": "创建矩阵流程",
+      "dialog-description": "以模板为基础创建一个新的矩阵流程.",
+      "label-name-input": "流程名",
+      "label-description-input": "流程简介（可选）",
+      "placeholder-name-input": "一个矩阵流程",
+      "placeholder-description-input": "这是一个矩阵流程",
+      "confirm-button": "创建"
+    },
+    "list-container": {
+      "placeholder-search-input": "搜索...",
+      "no-record-text": "未找到记录。"
+    }
   },
   "toast-message": {
     "save-success": "保存图形成功！"

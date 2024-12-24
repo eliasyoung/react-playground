@@ -19,7 +19,7 @@ const MatrixFlowListCard = React.memo<MatrixFlowListItemProps>(
     return (
       <div
         className={cn(
-          'p-4 border rounded-lg shadow-lg shadow-black/5 border-border bg-background dark:bg-neutral-700 hover:border-ring w-full cursor-pointer',
+          'p-4 border rounded-lg shadow-lg shadow-black/5 border-border bg-background dark:bg-neutral-700 hover:border-ring w-full cursor-pointer h-[150px]',
           className,
         )}
         onClick={(e) => onFlowCardClick()}

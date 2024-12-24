@@ -8,15 +8,12 @@ import {
   applyEdgeChanges,
   applyNodeChanges,
   BackgroundVariant,
-  type Node,
-  type Edge,
   type OnConnect,
   type OnNodesChange,
   type OnEdgesChange,
   type OnNodeDrag,
   useReactFlow,
   Panel,
-  getConnectedEdges,
   type OnNodesDelete,
 } from '@xyflow/react'
 import '@xyflow/react/dist/style.css'
@@ -33,29 +30,6 @@ import NewArrivalNode from '@/features/matrix-flow/components/node/new-arrival-n
 import { useTranslation } from 'react-i18next'
 import { getHelloWorld } from '../api'
 import type { MatrixFlowItem } from '../types'
-
-const initialNodes: Node[] = [
-  { id: '1', type: 'testNode', position: { x: 0, y: 0 }, data: { label: '1' } },
-  {
-    id: '2',
-    position: { x: 0, y: 100 },
-    type: 'testNode',
-    data: { label: '2', myData: 'something' },
-  },
-  {
-    id: '3',
-    position: { x: 0, y: 200 },
-    type: 'testNode',
-    data: { label: '3', myData: 'something' },
-  },
-  {
-    id: '4',
-    position: { x: 0, y: 300 },
-    type: 'testNode',
-    data: { label: '4', myData: 'something' },
-  },
-]
-const initialEdges: Edge[] = [{ id: 'e1-2', source: '1', target: '2' }]
 
 type MatrixFlowContainerProps = {
   initFlowData: MatrixFlowItem
@@ -77,13 +51,13 @@ const MatrixFlowContainer = React.memo<MatrixFlowContainerProps>(
         })),
       )
 
-    const { handleSaveMatrixFlow, handleCreateMatrixFlow } = useMatrixFlow()
+    const { handleSaveMatrixFlow, handleRunMatrixFlow } = useMatrixFlow()
 
     const flow = useReactFlow()
 
     const { t } = useTranslation('matrixFlow')
 
-    const { handleNodeDelete, getCurrentNodes } = useNodesInteraction()
+    const { handleNodeDelete } = useNodesInteraction()
 
     const [nodes, setNodes] = useState(initFlowData.graph.nodes)
     const [edges, setEdges] = useState(initFlowData.graph.edges)
@@ -148,10 +122,6 @@ const MatrixFlowContainer = React.memo<MatrixFlowContainerProps>(
       matrixflowContainerRef,
     )
 
-    useEffect(() => {
-      getHelloWorld().then((res) => console.log(res))
-    }, [])
-
     return (
       <div className='size-full overflow-hidden' ref={matrixflowContainerRef}>
         {newArrivalNodeData && <NewArrivalNode />}
@@ -177,6 +147,8 @@ const MatrixFlowContainer = React.memo<MatrixFlowContainerProps>(
               }
             }}
           >
+            {' '}
+            ``
             <Panel position='top-left'>
               <div>
                 <h1 className='text-xl text-primary font-display font-semibold'>
@@ -186,6 +158,12 @@ const MatrixFlowContainer = React.memo<MatrixFlowContainerProps>(
             </Panel>
             <Panel position='top-right'>
               <div className='flex flex-row gap-2'>
+                <Button
+                  variant={'outline'}
+                  onClick={() => handleRunMatrixFlow(initFlowData.id)}
+                >
+                  {t('control-panel.run')}
+                </Button>
                 <Button
                   variant={'outline'}
                   onClick={() => handleSaveMatrixFlow(initFlowData.id)}

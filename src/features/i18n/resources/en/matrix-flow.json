@@ -4,13 +4,30 @@
   },
   "control-panel": {
     "publish": "Publish",
-    "save": "Save"
+    "save": "Save",
+    "run": "Run"
   },
   "flow-contextmenu": {
     "add-node": "Add Node"
   },
   "node-contextmenu": {
     "delete-node": "Delete Node"
+  },
+  "matrix-flow-list": {
+    "create-matrix-dialog": {
+      "trigger-button": "Create New",
+      "dialog-title": "Create Matrix Flow",
+      "dialog-description": "Create matrix flow with template.",
+      "label-name-input": "Flow Name",
+      "label-description-input": "Flow Description(Optional)",
+      "placeholder-name-input": "interesting flow",
+      "placeholder-description-input": "This is a interesting flow",
+      "confirm-button": "Create"
+    },
+    "list-container": {
+      "placeholder-search-input": "Search...",
+      "no-record-text": "No Result Found."
+    }
   },
   "toast-message": {
     "save-success": "Save graph successfully!"
