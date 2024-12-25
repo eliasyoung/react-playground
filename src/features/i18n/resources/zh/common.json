@@ -13,5 +13,13 @@
   },
   "i18": {
     "toggle-button-text-sr": "切换语言"
+  },
+  "base": {
+    "confirm-dialog": {
+      "title": "请确认",
+      "description": "此操作无法被撤回，请确认！",
+      "cancel-button": "取消",
+      "confirm-button": "确认"
+    }
   }
 }

@@ -1,6 +1,6 @@
-import React, { useMemo, useRef, useState } from 'react'
+import React, { useMemo, useRef, useState, useCallback } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { getFlowList } from '@/features/matrix-flow/api'
+import { getFlowList, deleteFlowById } from '@/features/matrix-flow/api'
 
 import MatrixFlowListCard from './matrix-flow-list-card'
 import CreateMatrixFlowDialog, {
@@ -12,6 +12,7 @@ import Loading from '@/components/ui/loading'
 import { Plus, Search, Squirrel } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from '@tanstack/react-router'
+import { toast } from 'sonner'
 
 export const MatrixFLowListContainer = React.memo(() => {
   const { t } = useTranslation('matrixFlow')
@@ -41,6 +42,17 @@ export const MatrixFLowListContainer = React.memo(() => {
       navigate({ to: `/matrix-flow/${id}` })
     }
   }
+
+  const onFlowConfirmDelete = useCallback(async (flow_id: string) => {
+    try {
+      await deleteFlowById(flow_id)
+      toast.success('Delete Successfully!')
+      refetch()
+    } catch (err) {
+      console.log(err)
+    } finally {
+    }
+  }, [])
 
   return (
     <>
@@ -84,9 +96,13 @@ export const MatrixFLowListContainer = React.memo(() => {
               </div>
             </div>
             {filteredItemList.length > 0 ? (
-              <div className='size-full grid gap-4 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 flex-1'>
+              <div className='grid gap-4 grid-cols-1 lg:grid-cols-3 xl:grid-cols-4'>
                 {filteredItemList.map((flow) => (
-                  <MatrixFlowListCard key={flow.id} data={flow} />
+                  <MatrixFlowListCard
+                    key={flow.id}
+                    data={flow}
+                    onDeleteConfirm={onFlowConfirmDelete}
+                  />
                 ))}
               </div>
             ) : (

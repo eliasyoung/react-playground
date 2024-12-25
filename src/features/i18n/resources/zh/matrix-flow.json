@@ -27,9 +27,15 @@
     "list-container": {
       "placeholder-search-input": "搜索...",
       "no-record-text": "未找到记录。"
+    },
+    "delete-matrix-dialog": {
+      "dialog-title": "删除矩阵流程",
+      "dialog-description": "确认删除流程 {{flow_name}} ？请注意此操作无法被撤回。",
+      "confirm-button": "删除"
     }
   },
   "toast-message": {
-    "save-success": "保存图形成功！"
+    "save-success": "保存图形成功！",
+    "delete-matrix-success": "流程删除成功!"
   }
 }

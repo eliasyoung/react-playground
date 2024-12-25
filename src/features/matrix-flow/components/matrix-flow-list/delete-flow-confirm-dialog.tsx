@@ -18,19 +18,14 @@ import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { UseMatrixFlowList } from '@/features/matrix-flow/hooks/use-matrix-flow-list'
 
-type CreateFlowForm = {
-  name: string
-  description: string
+export type DeleteFlowConfirmDialogType = string
+
+export type DeleteFlowConfirmDialogRefType = {
+  show: (flow_id: string) => Promise<DeleteFlowConfirmDialogType | false>
 }
 
-export type CreateMatrixFlowDialogType = string
-
-export type CreateMatrixFlowDialogRefType = {
-  show: () => Promise<CreateMatrixFlowDialogType | false>
-}
-
-const CreateMatrixFlowDialog = React.forwardRef<CreateMatrixFlowDialogRefType>(
-  (_props, ref) => {
+const DeleteFlowConfirmDialog =
+  React.forwardRef<DeleteFlowConfirmDialogRefType>((_props, ref) => {
     const [visible, setVisible] = useState(false)
     const [isCreating, setIsCreating] = useState(false)
     const [formValue, setFormValue] = useState<CreateFlowForm>({
@@ -41,7 +36,7 @@ const CreateMatrixFlowDialog = React.forwardRef<CreateMatrixFlowDialogRefType>(
     const { t } = useTranslation('matrixFlow')
 
     const promiseRef = useRef<{
-      resolve: (value: CreateMatrixFlowDialogType | false) => void
+      resolve: (value: DeleteFlowConfirmDialogType | false) => void
     }>()
 
     useImperativeHandle(ref, () => ({
@@ -84,7 +79,7 @@ const CreateMatrixFlowDialog = React.forwardRef<CreateMatrixFlowDialogRefType>(
           description,
         })
         toast.success('create flow successfully!')
-        promiseRef.current?.resolve(res.data.id)
+        promiseRef.current?.resolve(res.id)
         setFormValue({
           name: '',
           description: '',
@@ -187,9 +182,8 @@ const CreateMatrixFlowDialog = React.forwardRef<CreateMatrixFlowDialogRefType>(
         </DialogContent>
       </Dialog>
     )
-  },
-)
+  })
 
-CreateMatrixFlowDialog.displayName = 'CreateMatrixFlowDialog'
+DeleteFlowConfirmDialog.displayName = 'DeleteFlowConfirmDialog'
 
-export default CreateMatrixFlowDialog
+export default DeleteFlowConfirmDialog

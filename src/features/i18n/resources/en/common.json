@@ -13,5 +13,13 @@
   },
   "i18": {
     "toggle-button-text-sr": "Switch Language"
+  },
+  "base": {
+    "confirm-dialog": {
+      "title": "Are you sure?",
+      "description": "This action cannot be undone. Please confirm!",
+      "cancel-button": "Cancel",
+      "confirm-button": "Confirm"
+    }
   }
 }

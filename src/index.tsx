@@ -5,6 +5,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 
+import { NuqsAdapter } from 'nuqs/adapters/react'
+
 import { routeTree } from './routeTree.gen'
 
 import '@features/i18n'
@@ -54,10 +56,12 @@ if (rootEl) {
   const root = ReactDOM.createRoot(rootEl)
   root.render(
     <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <Toaster position='top-center' />
-      </QueryClientProvider>
+      <NuqsAdapter>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+          <Toaster position='top-center' />
+        </QueryClientProvider>
+      </NuqsAdapter>
     </React.StrictMode>,
   )
 }

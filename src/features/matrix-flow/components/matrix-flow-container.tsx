@@ -28,7 +28,6 @@ import { useShallow } from 'zustand/react/shallow'
 import { useMatrixFlow } from '../hooks/use-matrix-flow'
 import NewArrivalNode from '@/features/matrix-flow/components/node/new-arrival-node'
 import { useTranslation } from 'react-i18next'
-import { getHelloWorld } from '../api'
 import type { MatrixFlowItem } from '../types'
 
 type MatrixFlowContainerProps = {

@@ -48,3 +48,9 @@ export const postRunFlow = async (flow_id: string) => {
     },
   }).then((res) => res.json())
 }
+
+export const deleteFlowById = async (flow_id: string) => {
+  return fetch(`http://127.0.0.1:8000/matrix_flow/${flow_id}/delete`, {
+    method: 'DELETE',
+  }).then((res) => res.json())
+}

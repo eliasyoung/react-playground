@@ -27,9 +27,15 @@
     "list-container": {
       "placeholder-search-input": "Search...",
       "no-record-text": "No Result Found."
+    },
+    "delete-matrix-dialog": {
+      "dialog-title": "Delete Matrix Flow",
+      "dialog-description": "Confirm to delete flow {{flow_name}}? Please note this action cannot be undone.",
+      "confirm-button": "Delete"
     }
   },
   "toast-message": {
-    "save-success": "Save graph successfully!"
+    "save-success": "Save graph successfully!",
+    "delete-matrix-success": "Delete flow successfully!"
   }
 }
