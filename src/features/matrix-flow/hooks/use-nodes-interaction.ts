@@ -1,9 +1,9 @@
 import { useReactFlow } from '@xyflow/react'
 import { useCallback } from 'react'
-import { useTranslation } from 'react-i18next'
 import { useShallow } from 'zustand/react/shallow'
 import useMatrixFlowStore from '../store'
 import { generateNode } from '../utils'
+import { MatrixFlowNodeType } from '../types'
 
 export const useNodesInteraction = () => {
   const flow = useReactFlow()
@@ -32,14 +32,24 @@ export const useNodesInteraction = () => {
     setNewArrivalNodeData({
       id: newNode.id,
       data: newNode.data,
-      type: 'testNode',
+      type: MatrixFlowNodeType.Add,
     })
   }, [isAddingNode, flow])
 
   const handleNodeDelete = useCallback(
     (node_id: string) => {
       const selectedNode = flow.getNode(node_id)
-      if (selectedNode) flow.deleteElements({ nodes: [selectedNode] })
+      if (selectedNode) {
+        flow.deleteElements({ nodes: [selectedNode] })
+      }
+    },
+    [flow],
+  )
+
+  const handleEdgeDelete = useCallback(
+    (edge_id: string) => {
+      const selectedEdge = flow.getEdge(edge_id)
+      if (selectedEdge) flow.deleteElements({ edges: [selectedEdge] })
     },
     [flow],
   )
@@ -50,9 +60,28 @@ export const useNodesInteraction = () => {
     return nodes
   }, [flow])
 
+  // // Nodes interaction
+  // const handleNodesDelete = useCallback(() => {
+  //   const edges = flow.getEdges()
+
+  //   if (edges.some((e) => e.selected)) {
+  //     return
+  //   }
+
+  //   const selectedNode = nodes.find((n) => n.selected)
+  //   if (
+  //     selectedNode &&
+  //     selectedNode.type !== MatrixFlowNodeType.Start &&
+  //     selectedNode.type !== MatrixFlowNodeType.End
+  //   ) {
+  //     flow.deleteElements({ nodes: [selectedNode] })
+  //   }
+  // }, [flow])
+
   return {
     handleNodeAddWithPanelContextClick,
     handleNodeDelete,
+    handleEdgeDelete,
     getCurrentNodes,
   }
 }

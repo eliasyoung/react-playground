@@ -1,6 +1,16 @@
 {
   "node": {
-    "title": "测试节点{{id}}"
+    "title": "测试节点{{id}}",
+    "node-type": {
+      "start": "开始",
+      "end": "结束",
+      "input": "输入",
+      "test": "测试",
+      "add": "加运算",
+      "minus": "减运算",
+      "multiply": "乘运算",
+      "divide": "除运算"
+    }
   },
   "control-panel": {
     "publish": "发布",

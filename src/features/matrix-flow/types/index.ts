@@ -1,7 +1,5 @@
 import type { ReactFlowJsonObject } from '@xyflow/react'
 
-export type NodeType = 'testNode'
-
 export type MousePosition = {
   pageX: number
   pageY: number
@@ -12,7 +10,7 @@ export type MousePosition = {
 export type NewArrivalNodeData = {
   id: string
   data: Record<string, unknown>
-  type: NodeType
+  type: MatrixFlowNodeType
 }
 
 export type MatrixFlowListItem = {
@@ -28,3 +26,16 @@ export type MatrixFlowGraphData = {
 }
 
 export type MatrixFlowItem = MatrixFlowListItem & MatrixFlowGraphData
+
+export enum MatrixFlowNodeType {
+  Start = 'start',
+  /* For test */
+  Test = 'test',
+  Input = 'input',
+  Add = 'add',
+  Minus = 'minus',
+  Multiply = 'multiply',
+  Divide = 'divide',
+  /* */
+  End = 'end',
+}

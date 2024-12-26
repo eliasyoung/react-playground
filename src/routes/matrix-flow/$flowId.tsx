@@ -1,5 +1,5 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
-import MatrixFlowContainer from '@/features/matrix-flow/components/matrix-flow-container'
+import MatrixFlowContainer from '@/features/matrix-flow/components/matrix-flow-container/matrix-flow-container'
 import { ReactFlowProvider } from '@xyflow/react'
 import { getMatrixFlowDetail } from '@/features/matrix-flow/api'
 import Loading from '@/components/ui/loading'

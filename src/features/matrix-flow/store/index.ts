@@ -9,6 +9,8 @@ interface MatrixFlowState {
   setNewArrivalNodeData: (node: NewArrivalNodeData | null) => void
   isAddingNode: boolean
   setIsAddingNode: (isAdding: boolean) => void
+  onSelectNodeId: string | null
+  setOnSelectNodeId: (nodeId: string | null) => void
 }
 
 const useMatrixFlowStore = create<MatrixFlowState>()((set) => ({
@@ -20,6 +22,8 @@ const useMatrixFlowStore = create<MatrixFlowState>()((set) => ({
     set((_state) => ({ newArrivalNodeData: node })),
   isAddingNode: false,
   setIsAddingNode: (isAdding) => set((_state) => ({ isAddingNode: isAdding })),
+  onSelectNodeId: null,
+  setOnSelectNodeId: (nodeId) => set((_state) => ({ onSelectNodeId: nodeId })),
 }))
 
 export default useMatrixFlowStore

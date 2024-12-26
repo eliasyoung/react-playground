@@ -4,15 +4,25 @@ import { Handle, Position, type NodeProps } from '@xyflow/react'
 
 import NodeContextMenu from './node-context-menu'
 import BaseNode from '../base/base-node'
+import { MatrixFlowNodeType } from '../../types'
 
-const MatrixNode = React.memo<NodeProps>(({ id, data, selected }) => {
+const MatrixNode = React.memo<NodeProps>(({ id, data, selected, type }) => {
   return (
     <>
-      <NodeContextMenu id={id}>
-        <BaseNode id={id} data={data} selected={selected} />
+      <NodeContextMenu id={id} type={type}>
+        <BaseNode
+          id={id}
+          data={data}
+          selected={selected}
+          type={type as MatrixFlowNodeType}
+        />
       </NodeContextMenu>
-      <Handle type='target' position={Position.Left} className='p-1' />
-      <Handle type='source' position={Position.Right} className='p-1' />
+      {type !== MatrixFlowNodeType.Start && (
+        <Handle type='target' position={Position.Left} className='p-1' />
+      )}
+      {type !== MatrixFlowNodeType.End && (
+        <Handle type='source' position={Position.Right} className='p-1' />
+      )}
     </>
   )
 })

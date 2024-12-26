@@ -1,6 +1,16 @@
 {
   "node": {
-    "title": "Test Node {{id}}"
+    "title": "Test Node {{id}}",
+    "node-type": {
+      "start": "Start Node",
+      "end": "End Node",
+      "input": "Input Node",
+      "test": "Test Node",
+      "add": "Add Node",
+      "minus": "Minus Node",
+      "multiply": "Multiply Node",
+      "divide": "Divide Node"
+    }
   },
   "control-panel": {
     "publish": "Publish",

@@ -1,4 +1,5 @@
 import type { Node, Edge, Viewport, ReactFlowJsonObject } from '@xyflow/react'
+import { MatrixFlowNodeType } from '../types'
 
 export const generateNode = (node_id?: string) => {
   const id = node_id ?? `${Date.now()}`
@@ -6,8 +7,8 @@ export const generateNode = (node_id?: string) => {
   const node: Node = {
     id,
     position: { x: 0, y: 0 },
-    type: 'testNode',
-    data: { id, myData: 'something' },
+    type: MatrixFlowNodeType.Add,
+    data: { id },
   }
 
   return node
@@ -21,20 +22,20 @@ export const generateFlowTemplate = () => {
   const nodes: Node[] = [
     {
       id: startNodeId,
-      type: 'testNode',
+      type: MatrixFlowNodeType.Start,
       position: { x: 200, y: 200 },
-      data: { label: startNodeId },
+      data: { id: startNodeId },
     },
     {
       id: endNodeId,
-      type: 'testNode',
+      type: MatrixFlowNodeType.End,
       position: { x: 600, y: 200 },
-      data: { label: endNodeId },
+      data: { id: endNodeId },
     },
   ]
   const edges: Edge[] = [
     {
-      id: `${startNodeId}-${endNodeId}`,
+      id: `xy-edge_${startNodeId}-${endNodeId}`,
       source: startNodeId,
       target: endNodeId,
     },
@@ -49,4 +50,10 @@ export const generateFlowTemplate = () => {
     edges,
     viewport,
   }
+}
+
+export const isEventTargetInputArea = (target: HTMLElement) => {
+  if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') return true
+
+  if (target.contentEditable === 'true') return true
 }

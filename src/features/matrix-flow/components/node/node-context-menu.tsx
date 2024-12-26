@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import {
   ContextMenu,
@@ -17,20 +17,39 @@ import {
 } from '@/components/ui/context-menu'
 import { useNodesInteraction } from '../../hooks/use-nodes-interaction'
 import { useTranslation } from 'react-i18next'
+import { MatrixFlowNodeType } from '../../types'
 
 const NodeContextMenu = React.memo(
-  ({ children, id }: { children?: React.ReactNode; id: string }) => {
+  ({
+    children,
+    id,
+    type,
+  }: { children?: React.ReactNode; id: string; type: string }) => {
     const { t } = useTranslation('matrixFlow')
 
     const { handleNodeDelete } = useNodesInteraction()
+
+    const canDeleteNode = useMemo(() => {
+      return (
+        type !== MatrixFlowNodeType.Start && type !== MatrixFlowNodeType.End
+      )
+    }, [type])
 
     return (
       <ContextMenu>
         <ContextMenuTrigger>{children && children}</ContextMenuTrigger>
         <ContextMenuContent className='w-64'>
-          <ContextMenuItem inset onClick={() => handleNodeDelete(id)}>
-            {t('node-contextmenu.delete-node')}
-          </ContextMenuItem>
+          {canDeleteNode && (
+            <ContextMenuItem
+              inset
+              onClick={(e) => {
+                e.stopPropagation()
+                handleNodeDelete(id)
+              }}
+            >
+              {t('node-contextmenu.delete-node')}
+            </ContextMenuItem>
+          )}
           {/* <ContextMenuItem inset>
             Back
             <ContextMenuShortcut>⌘[</ContextMenuShortcut>
