@@ -29,16 +29,21 @@ import { useShortcuts } from '@/features/matrix-flow/hooks/use-shortcuts'
 import { useNodesInteraction } from '@/features/matrix-flow/hooks/use-nodes-interaction'
 import { useTheme } from '@/features/theme-toggle/hooks'
 
+import { isEnumMember } from '@/lib/utils'
+
 import MatrixNode from '@/features/matrix-flow/components/node/node'
 import NewArrivalNode from '@/features/matrix-flow/components/node/new-arrival-node'
 import FlowRightDetailPanel from '@/features/matrix-flow/components/matrix-flow-container/flow-right-detail-panel'
-import FlowContextMenu from '@/features/matrix-flow/components/matrix-flow-container/flow-context-menu'
+import AddNodeMenu from '@/features/matrix-flow/components/matrix-flow-container/add-node-menu'
+import NodeContextMenu from '@/features/matrix-flow/components/node/node-context-menu'
+import FlowPaneContextMenu from '@/features/matrix-flow/components/matrix-flow-container/flow-pane-context-menu'
 import { Button } from '@/components/ui/button'
 
 import {
   type MatrixFlowItem,
   MatrixFlowNodeType,
 } from '@/features/matrix-flow/types'
+import { AnimatePresence } from 'motion/react'
 
 type MatrixFlowContainerProps = {
   initFlowData: MatrixFlowItem
@@ -56,6 +61,12 @@ const MatrixFlowContainer = React.memo<MatrixFlowContainerProps>(
       newArrivalNodeData,
       onSelectNodeId,
       setOnSelectNodeId,
+      nodeContextMenu,
+      setNodeContextMenu,
+      paneContextMenu,
+      setPaneContextMenu,
+      addNodeMenu,
+      setAddNodeMenu,
     } = useMatrixFlowStore(
       useShallow((state) => ({
         isAddingNode: state.isAddingNode,
@@ -64,6 +75,12 @@ const MatrixFlowContainer = React.memo<MatrixFlowContainerProps>(
         newArrivalNodeData: state.newArrivalNodeData,
         onSelectNodeId: state.onSelectNodeId,
         setOnSelectNodeId: state.setOnSelectNodeId,
+        nodeContextMenu: state.nodeContextMenu,
+        setNodeContextMenu: state.setNodeContextMenu,
+        paneContextMenu: state.paneContextMenu,
+        setPaneContextMenu: state.setPaneContextMenu,
+        addNodeMenu: state.addNodeMenu,
+        setAddNodeMenu: state.setAddNodeMenu,
       })),
     )
 
@@ -114,8 +131,6 @@ const MatrixFlowContainer = React.memo<MatrixFlowContainerProps>(
 
     const onNodeDeleted = useCallback<OnNodesDelete>(
       (nodes) => {
-        console.log(nodes)
-        console.log(onSelectNodeId)
         onSelectNodeId &&
           nodes.some((node) => node.id === onSelectNodeId) &&
           setOnSelectNodeId(null)
@@ -147,81 +162,132 @@ const MatrixFlowContainer = React.memo<MatrixFlowContainerProps>(
         ref={matrixflowContainerRef}
       >
         {newArrivalNodeData && <NewArrivalNode />}
-        <FlowContextMenu>
-          <ReactFlow
-            nodeTypes={nodeTypes}
-            nodes={nodes}
-            edges={edges}
-            onNodesDelete={onNodeDeleted}
-            onNodesChange={onNodesChange}
-            onNodeClick={(_e, node) => {
-              if (onSelectNodeId && onSelectNodeId === node.id) return
-              if (onSelectNodeId) {
-                setOnSelectNodeId(null)
-                setTimeout(() => {
-                  setOnSelectNodeId(node.id)
-                }, 150)
-              } else {
+        <AddNodeMenu />
+        <NodeContextMenu />
+        <FlowPaneContextMenu />
+        <ReactFlow
+          nodeTypes={nodeTypes}
+          nodes={nodes}
+          edges={edges}
+          onNodesDelete={onNodeDeleted}
+          onNodesChange={onNodesChange}
+          onNodeClick={(_e, node) => {
+            if (nodeContextMenu) {
+              setNodeContextMenu(null)
+            }
+            if (paneContextMenu) {
+              setPaneContextMenu(null)
+            }
+            if (addNodeMenu) {
+              setAddNodeMenu(null)
+            }
+            if (onSelectNodeId && onSelectNodeId === node.id) return
+            if (onSelectNodeId) {
+              setOnSelectNodeId(null)
+              setTimeout(() => {
                 setOnSelectNodeId(node.id)
+              }, 150)
+            } else {
+              setOnSelectNodeId(node.id)
+            }
+          }}
+          onPaneClick={(e) => {
+            if (onSelectNodeId) {
+              setOnSelectNodeId(null)
+            }
+            if (nodeContextMenu) {
+              setNodeContextMenu(null)
+            }
+            if (paneContextMenu) {
+              setPaneContextMenu(null)
+            }
+            if (addNodeMenu) {
+              setAddNodeMenu(null)
+            }
+          }}
+          onEdgeContextMenu={(e) => {
+            if (nodeContextMenu) {
+              setNodeContextMenu(null)
+            }
+            if (paneContextMenu) {
+              setPaneContextMenu(null)
+            }
+          }}
+          onEdgesChange={onEdgesChange}
+          onNodeDragStop={onNodesDragEnd}
+          onConnect={onConnect}
+          colorMode={theme}
+          deleteKeyCode={null}
+          defaultViewport={initFlowData.graph.viewport}
+          onPaneContextMenu={(e) => {
+            e.preventDefault()
+
+            setPaneContextMenu(
+              paneContextMenu
+                ? null
+                : {
+                    top: e.clientY,
+                    left: e.clientX,
+                  },
+            )
+          }}
+          onNodeContextMenu={(e, node) => {
+            e.preventDefault()
+
+            const nodeType = node.type
+
+            if (nodeType && isEnumMember(nodeType, MatrixFlowNodeType)) {
+              const contextedNode = {
+                node_id: node.id,
+                node_type: nodeType,
+                top: e.clientY,
+                left: e.clientX,
               }
-            }}
-            onPaneClick={(_e) => {
-              if (onSelectNodeId) {
-                setOnSelectNodeId(null)
-              }
-            }}
-            onEdgesChange={onEdgesChange}
-            onNodeDragStop={onNodesDragEnd}
-            onConnect={onConnect}
-            colorMode={theme}
-            deleteKeyCode={null}
-            defaultViewport={initFlowData.graph.viewport}
-            onContextMenu={(e) => {
-              if (
-                e.target instanceof Element &&
-                !e.target.closest('div.react-flow__pane.draggable')
-              ) {
-                e.preventDefault()
-              }
-            }}
-          >
-            {' '}
-            <Panel position='top-left'>
-              <div>
-                <h1 className='text-xl text-primary font-display font-semibold'>
-                  {initFlowData.name}
-                </h1>
-              </div>
-            </Panel>
-            <Panel position='top-right'>
-              <div className='flex flex-row gap-2'>
-                <Button
-                  variant={'outline'}
-                  onClick={() => handleRunMatrixFlow(initFlowData.id)}
-                >
-                  {t('control-panel.run')}
-                </Button>
-                <Button
-                  variant={'outline'}
-                  onClick={() => handleSaveMatrixFlow(initFlowData.id)}
-                  disabled={isAddingNode}
-                >
-                  {t('control-panel.save')}
-                </Button>
-                <Button
-                  variant={'outline'}
-                  onClick={() => console.log(onSelectNodeId)}
-                >
-                  {t('control-panel.publish')}
-                </Button>
-              </div>
-            </Panel>
-            <Controls />
-            <MiniMap />
-            <FlowRightDetailPanel />
-            <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-          </ReactFlow>
-        </FlowContextMenu>
+
+              if (nodeContextMenu) {
+                setNodeContextMenu(null)
+                setTimeout(() => {
+                  setNodeContextMenu(contextedNode)
+                }, 150)
+              } else setNodeContextMenu(contextedNode)
+            }
+          }}
+        >
+          <Panel position='top-left'>
+            <div>
+              <h1 className='text-xl text-primary font-display font-semibold'>
+                {initFlowData.name}
+              </h1>
+            </div>
+          </Panel>
+          <Panel position='top-right'>
+            <div className='flex flex-row gap-2'>
+              <Button
+                variant={'outline'}
+                onClick={() => handleRunMatrixFlow(initFlowData.id)}
+              >
+                {t('control-panel.run')}
+              </Button>
+              <Button
+                variant={'outline'}
+                onClick={() => handleSaveMatrixFlow(initFlowData.id)}
+                disabled={isAddingNode}
+              >
+                {t('control-panel.save')}
+              </Button>
+              <Button
+                variant={'outline'}
+                onClick={() => console.log(onSelectNodeId)}
+              >
+                {t('control-panel.publish')}
+              </Button>
+            </div>
+          </Panel>
+          <Controls />
+          <MiniMap />
+          <FlowRightDetailPanel />
+          <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+        </ReactFlow>
       </div>
     )
   },

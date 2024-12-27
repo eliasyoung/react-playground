@@ -4,7 +4,7 @@
     "node-type": {
       "start": "开始",
       "end": "结束",
-      "input": "输入",
+      "input-field": "输入",
       "test": "测试",
       "add": "加运算",
       "minus": "减运算",
@@ -22,6 +22,10 @@
   },
   "node-contextmenu": {
     "delete-node": "删除节点"
+  },
+  "add-node-menu": {
+    "search-input-placeholder": "搜索节点",
+    "search-no-result": "没有找到节点。"
   },
   "matrix-flow-list": {
     "create-matrix-dialog": {

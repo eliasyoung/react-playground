@@ -1,13 +1,16 @@
 import type { Node, Edge, Viewport, ReactFlowJsonObject } from '@xyflow/react'
 import { MatrixFlowNodeType } from '../types'
 
-export const generateNode = (node_id?: string) => {
+export const generateNode = (
+  node_type: MatrixFlowNodeType,
+  node_id?: string,
+) => {
   const id = node_id ?? `${Date.now()}`
 
   const node: Node = {
     id,
     position: { x: 0, y: 0 },
-    type: MatrixFlowNodeType.Add,
+    type: node_type,
     data: { id },
   }
 

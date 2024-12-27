@@ -22,19 +22,22 @@ export const useNodesInteraction = () => {
     })),
   )
 
-  const handleNodeAddWithPanelContextClick = useCallback(() => {
-    if (isAddingNode || newArrivalNodeData) return
+  const handleNodeAddWithPanelContextClick = useCallback(
+    (node_type: MatrixFlowNodeType) => {
+      if (isAddingNode || newArrivalNodeData) return
 
-    setIsAddingNode(true)
+      setIsAddingNode(true)
 
-    const newNode = generateNode()
+      const newNode = generateNode(node_type)
 
-    setNewArrivalNodeData({
-      id: newNode.id,
-      data: newNode.data,
-      type: MatrixFlowNodeType.Add,
-    })
-  }, [isAddingNode, flow])
+      setNewArrivalNodeData({
+        id: newNode.id,
+        data: newNode.data,
+        type: newNode.type as MatrixFlowNodeType,
+      })
+    },
+    [isAddingNode, flow],
+  )
 
   const handleNodeDelete = useCallback(
     (node_id: string) => {

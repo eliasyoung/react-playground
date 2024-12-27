@@ -96,7 +96,9 @@ const NewArrivalNode = React.memo(() => {
     [newArrivalNodeData],
   )
 
-  useEventListener('click', onClickHandler)
+  useEventListener('click', onClickHandler, undefined, {
+    capture: true,
+  })
 
   useEventListener('contextmenu', onContextMenuHandler)
 

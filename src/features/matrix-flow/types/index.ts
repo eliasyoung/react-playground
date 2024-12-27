@@ -31,11 +31,28 @@ export enum MatrixFlowNodeType {
   Start = 'start',
   /* For test */
   Test = 'test',
-  Input = 'input',
+  InputField = 'input-field',
   Add = 'add',
   Minus = 'minus',
   Multiply = 'multiply',
   Divide = 'divide',
   /* */
   End = 'end',
+}
+
+export type PaneContextMenuData = {
+  top: number
+  left: number
+}
+
+export type NodeContextMenuData = {
+  node_id: string
+  node_type: MatrixFlowNodeType
+  top: number
+  left: number
+}
+
+export type AddNodeMenuData = {
+  top: number
+  left: number
 }

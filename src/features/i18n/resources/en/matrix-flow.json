@@ -4,7 +4,7 @@
     "node-type": {
       "start": "Start Node",
       "end": "End Node",
-      "input": "Input Node",
+      "input-field": "Input Node",
       "test": "Test Node",
       "add": "Add Node",
       "minus": "Minus Node",
@@ -22,6 +22,10 @@
   },
   "node-contextmenu": {
     "delete-node": "Delete Node"
+  },
+  "add-node-menu": {
+    "search-input-placeholder": "Search Node",
+    "search-no-result": "No node found."
   },
   "matrix-flow-list": {
     "create-matrix-dialog": {

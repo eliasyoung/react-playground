@@ -9,14 +9,12 @@ import { MatrixFlowNodeType } from '../../types'
 const MatrixNode = React.memo<NodeProps>(({ id, data, selected, type }) => {
   return (
     <>
-      <NodeContextMenu id={id} type={type}>
-        <BaseNode
-          id={id}
-          data={data}
-          selected={selected}
-          type={type as MatrixFlowNodeType}
-        />
-      </NodeContextMenu>
+      <BaseNode
+        id={id}
+        data={data}
+        selected={selected}
+        type={type as MatrixFlowNodeType}
+      />
       {type !== MatrixFlowNodeType.Start && (
         <Handle type='target' position={Position.Left} className='p-1' />
       )}
