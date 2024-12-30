@@ -1,9 +1,9 @@
 import common from './common.json'
-import matrixFlow from './matrix-flow.json'
+import matrix_workflow from './matrix-workflow.json'
 
 const zh = {
   common,
-  matrixFlow,
+  matrix_workflow,
 }
 
 export default zh

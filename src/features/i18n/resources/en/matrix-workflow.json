@@ -1,0 +1,55 @@
+{
+  "node": {
+    "title": "Test Node {{id}}",
+    "node-type": {
+      "start": "Start Node",
+      "end": "End Node",
+      "input-field": "Input Node",
+      "test": "Test Node",
+      "add": "Add Node",
+      "minus": "Minus Node",
+      "multiply": "Multiply Node",
+      "divide": "Divide Node"
+    }
+  },
+  "control-panel": {
+    "publish": "Publish",
+    "save": "Save",
+    "run": "Run"
+  },
+  "workflow-contextmenu": {
+    "add-node": "Add Node"
+  },
+  "node-contextmenu": {
+    "delete-node": "Delete Node"
+  },
+  "add-node-menu": {
+    "search-input-placeholder": "Search Node",
+    "search-no-result": "No node found."
+  },
+  "matrix-workflow-list": {
+    "create-matrix-dialog": {
+      "trigger-button": "Create New",
+      "dialog-title": "Create Matrix Workflow",
+      "dialog-description": "Create matrix workflow with template.",
+      "label-name-input": "Workflow Name",
+      "label-description-input": "Workflow Description(Optional)",
+      "placeholder-name-input": "interesting workflow",
+      "placeholder-description-input": "This is a interesting workflow",
+      "confirm-button": "Create"
+    },
+    "list-container": {
+      "placeholder-search-input": "Search...",
+      "no-record-text": "No Result Found."
+    },
+    "delete-matrix-dialog": {
+      "dialog-title": "Delete Matrix Workflow",
+      "dialog-description": "Confirm to delete workflow {{workflow_name}}? Please note this action cannot be undone.",
+      "confirm-button": "Delete"
+    }
+  },
+  "toast-message": {
+    "save-success": "Save graph successfully!",
+    "delete-matrix-success": "Delete workflow successfully!"
+  }
+}

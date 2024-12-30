@@ -20,8 +20,8 @@ export const TopNav = () => {
       label: t('header.nav-posts'),
     },
     {
-      id: '/matrix-flow',
-      label: t('header.nav-matrix-flows'),
+      id: '/matrix-workflow',
+      label: t('header.nav-matrix-workflow'),
     },
   ]
 

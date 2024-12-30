@@ -13,9 +13,9 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as PostsIndexImport } from './routes/posts/index'
-import { Route as MatrixFlowIndexImport } from './routes/matrix-flow/index'
+import { Route as MatrixWorkflowIndexImport } from './routes/matrix-workflow/index'
 import { Route as PostsPostIdImport } from './routes/posts/$postId'
-import { Route as MatrixFlowFlowIdImport } from './routes/matrix-flow/$flowId'
+import { Route as MatrixWorkflowWorkflowIdImport } from './routes/matrix-workflow/$workflowId'
 import { Route as aboutAboutImport } from './routes/(about)/about'
 import { Route as aboutAboutWhatImport } from './routes/(about)/about.what'
 
@@ -33,9 +33,9 @@ const PostsIndexRoute = PostsIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const MatrixFlowIndexRoute = MatrixFlowIndexImport.update({
-  id: '/matrix-flow/',
-  path: '/matrix-flow/',
+const MatrixWorkflowIndexRoute = MatrixWorkflowIndexImport.update({
+  id: '/matrix-workflow/',
+  path: '/matrix-workflow/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -45,9 +45,9 @@ const PostsPostIdRoute = PostsPostIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const MatrixFlowFlowIdRoute = MatrixFlowFlowIdImport.update({
-  id: '/matrix-flow/$flowId',
-  path: '/matrix-flow/$flowId',
+const MatrixWorkflowWorkflowIdRoute = MatrixWorkflowWorkflowIdImport.update({
+  id: '/matrix-workflow/$workflowId',
+  path: '/matrix-workflow/$workflowId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -81,11 +81,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof aboutAboutImport
       parentRoute: typeof rootRoute
     }
-    '/matrix-flow/$flowId': {
-      id: '/matrix-flow/$flowId'
-      path: '/matrix-flow/$flowId'
-      fullPath: '/matrix-flow/$flowId'
-      preLoaderRoute: typeof MatrixFlowFlowIdImport
+    '/matrix-workflow/$workflowId': {
+      id: '/matrix-workflow/$workflowId'
+      path: '/matrix-workflow/$workflowId'
+      fullPath: '/matrix-workflow/$workflowId'
+      preLoaderRoute: typeof MatrixWorkflowWorkflowIdImport
       parentRoute: typeof rootRoute
     }
     '/posts/$postId': {
@@ -95,11 +95,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PostsPostIdImport
       parentRoute: typeof rootRoute
     }
-    '/matrix-flow/': {
-      id: '/matrix-flow/'
-      path: '/matrix-flow'
-      fullPath: '/matrix-flow'
-      preLoaderRoute: typeof MatrixFlowIndexImport
+    '/matrix-workflow/': {
+      id: '/matrix-workflow/'
+      path: '/matrix-workflow'
+      fullPath: '/matrix-workflow'
+      preLoaderRoute: typeof MatrixWorkflowIndexImport
       parentRoute: typeof rootRoute
     }
     '/posts/': {
@@ -136,9 +136,9 @@ const aboutAboutRouteWithChildren = aboutAboutRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof aboutAboutRouteWithChildren
-  '/matrix-flow/$flowId': typeof MatrixFlowFlowIdRoute
+  '/matrix-workflow/$workflowId': typeof MatrixWorkflowWorkflowIdRoute
   '/posts/$postId': typeof PostsPostIdRoute
-  '/matrix-flow': typeof MatrixFlowIndexRoute
+  '/matrix-workflow': typeof MatrixWorkflowIndexRoute
   '/posts': typeof PostsIndexRoute
   '/about/what': typeof aboutAboutWhatRoute
 }
@@ -146,9 +146,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof aboutAboutRouteWithChildren
-  '/matrix-flow/$flowId': typeof MatrixFlowFlowIdRoute
+  '/matrix-workflow/$workflowId': typeof MatrixWorkflowWorkflowIdRoute
   '/posts/$postId': typeof PostsPostIdRoute
-  '/matrix-flow': typeof MatrixFlowIndexRoute
+  '/matrix-workflow': typeof MatrixWorkflowIndexRoute
   '/posts': typeof PostsIndexRoute
   '/about/what': typeof aboutAboutWhatRoute
 }
@@ -157,9 +157,9 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/(about)/about': typeof aboutAboutRouteWithChildren
-  '/matrix-flow/$flowId': typeof MatrixFlowFlowIdRoute
+  '/matrix-workflow/$workflowId': typeof MatrixWorkflowWorkflowIdRoute
   '/posts/$postId': typeof PostsPostIdRoute
-  '/matrix-flow/': typeof MatrixFlowIndexRoute
+  '/matrix-workflow/': typeof MatrixWorkflowIndexRoute
   '/posts/': typeof PostsIndexRoute
   '/(about)/about/what': typeof aboutAboutWhatRoute
 }
@@ -169,27 +169,27 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
-    | '/matrix-flow/$flowId'
+    | '/matrix-workflow/$workflowId'
     | '/posts/$postId'
-    | '/matrix-flow'
+    | '/matrix-workflow'
     | '/posts'
     | '/about/what'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/matrix-flow/$flowId'
+    | '/matrix-workflow/$workflowId'
     | '/posts/$postId'
-    | '/matrix-flow'
+    | '/matrix-workflow'
     | '/posts'
     | '/about/what'
   id:
     | '__root__'
     | '/'
     | '/(about)/about'
-    | '/matrix-flow/$flowId'
+    | '/matrix-workflow/$workflowId'
     | '/posts/$postId'
-    | '/matrix-flow/'
+    | '/matrix-workflow/'
     | '/posts/'
     | '/(about)/about/what'
   fileRoutesById: FileRoutesById
@@ -198,18 +198,18 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   aboutAboutRoute: typeof aboutAboutRouteWithChildren
-  MatrixFlowFlowIdRoute: typeof MatrixFlowFlowIdRoute
+  MatrixWorkflowWorkflowIdRoute: typeof MatrixWorkflowWorkflowIdRoute
   PostsPostIdRoute: typeof PostsPostIdRoute
-  MatrixFlowIndexRoute: typeof MatrixFlowIndexRoute
+  MatrixWorkflowIndexRoute: typeof MatrixWorkflowIndexRoute
   PostsIndexRoute: typeof PostsIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   aboutAboutRoute: aboutAboutRouteWithChildren,
-  MatrixFlowFlowIdRoute: MatrixFlowFlowIdRoute,
+  MatrixWorkflowWorkflowIdRoute: MatrixWorkflowWorkflowIdRoute,
   PostsPostIdRoute: PostsPostIdRoute,
-  MatrixFlowIndexRoute: MatrixFlowIndexRoute,
+  MatrixWorkflowIndexRoute: MatrixWorkflowIndexRoute,
   PostsIndexRoute: PostsIndexRoute,
 }
 
@@ -225,9 +225,9 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/(about)/about",
-        "/matrix-flow/$flowId",
+        "/matrix-workflow/$workflowId",
         "/posts/$postId",
-        "/matrix-flow/",
+        "/matrix-workflow/",
         "/posts/"
       ]
     },
@@ -240,14 +240,14 @@ export const routeTree = rootRoute
         "/(about)/about/what"
       ]
     },
-    "/matrix-flow/$flowId": {
-      "filePath": "matrix-flow/$flowId.tsx"
+    "/matrix-workflow/$workflowId": {
+      "filePath": "matrix-workflow/$workflowId.tsx"
     },
     "/posts/$postId": {
       "filePath": "posts/$postId.tsx"
     },
-    "/matrix-flow/": {
-      "filePath": "matrix-flow/index.tsx"
+    "/matrix-workflow/": {
+      "filePath": "matrix-workflow/index.tsx"
     },
     "/posts/": {
       "filePath": "posts/index.tsx"
